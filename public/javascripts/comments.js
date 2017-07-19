@@ -1,12 +1,13 @@
-function createComment() {
 
- $.post('/comments/new', $('#comments').val()).then((e)=>{
-   console.log(e);
- });
-}
 
 $(document).ready(function() {
+  $('#createComent').on('click', (e) => {
+    var content = $('#commentContent').val();
+    $.post('/comments/new', {
+      content: content
 
-  $( "#createComent" ).on( "click", createComment());
-
+    }).then( (response) => {
+    console.log(response);
+    });
+  });
 });

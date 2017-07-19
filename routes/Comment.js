@@ -34,19 +34,18 @@ router.post('/new', (req, res, next) => {
 //TODO create the new diet and insert it on Mongo
 let dietId = req.params.id;
 let creatorId = req.session.passport.user;
-
+console.log(req.body.content);
 
 let c = new Comment({
-
-    title: req.body.title,
     content: req.body.content,
     _diet: dietId,
     _creator: creatorId
 
   });
-
-  c.save((err, obj) => {
-    res.send(JSON.stringify(obj));
+console.log(c);
+  c.save((err, c) => {
+    console.log(c);
+    res.send(JSON.stringify(c));
   });
 
 });
