@@ -41,9 +41,6 @@ router.post('/:id/edit', upload.single('photo'), function(req, res, next) {
 });
 // CRUD => R: Retrieve - User detail
 router.get('/:id', function(req, res, next) {
-  //  var q1 = mongoose.model('User');
-  //  var q2 = mongoose.model('Diet');
-
   User.findById(req.params.id, function(err, u) {
     Diet.find({
       _creator: req.params.id
@@ -54,16 +51,6 @@ router.get('/:id', function(req, res, next) {
         session: req.session.currentUser
       });
     });
-    /*  User.findById(req.params.id, (err, u) => {
-        if(err){
-          console.log(err);
-        }
-        res.render('user/profile', {
-          title: 'Profile',
-          user: u,
-          session: req.session.currentUser
-        });
-      });*/
   });
 });
 module.exports = router;

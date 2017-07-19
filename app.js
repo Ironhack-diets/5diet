@@ -53,10 +53,12 @@ app.use(passport.session());
 //Require routes
 const index = require('./routes/index');
 const diet = require('./routes/diet');
+const recipe = require('./routes/recipe');
 const auth = require('./routes/auth');
 const user = require('./routes/user');
 app.use('/', index);
 app.use('/diets', diet);
+app.use('/recipes', recipe);
 app.use('/auth', auth);
 app.use('/user',user);
 require('./config/error-handler')(app);

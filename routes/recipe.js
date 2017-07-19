@@ -1,14 +1,14 @@
 const express = require('express');
 const router  = express.Router();
-const Diet = require('../models/Diet');
+const Recipe = require('../models/Recipe');
 const multer  = require('multer');
 const upload = multer({ dest: './public/uploads/' });
 
 /* GET All the diets -> Diet.find() */
 router.get('/', (req, res, next) => {
-  Diet.find({}, (err, diets) => {
+  Recipe.find({}, (err, recipes) => {
     res.render('index', {
-      diets: diets
+      recipes: recipes
     });
   });
 });
@@ -19,8 +19,8 @@ router.post('/:id/delete', (req, res, next) => {
 //TODO delete an ID
 let id = req.params.id;
 console.log(id);
-Diet.findByIdAndRemove(id, (err, obj) => {
-res.redirect("/user/:id");
+Recipe.findByIdAndRemove(id, (err, obj) => {
+res.redirect("/");
 if (err){ return next(err); }
 });
 });
@@ -28,7 +28,7 @@ if (err){ return next(err); }
 /* Get the form to create a new diet*/
 router.get('/:id/edit', (req, res, next) => {
 //TODO render new.ejs form and check if the user is login in.
-Diet.findById(req.params.id, (err, d) => {
+Recipe.findById(req.params.id, (err, d) => {
     if(err){
       console.log(err);
     }
@@ -52,7 +52,7 @@ let updates = {
 };
 console.log(updates);
 
-Diet.findByIdAndUpdate(req.params.id, updates, (err, d) => {
+Recipe.findByIdAndUpdate(req.params.id, updates, (err, d) => {
   if(err){
     console.log(err);
   }
@@ -87,26 +87,24 @@ let d = new Diet({
 /* Get the form to create a new diet*/
 router.get('/new', (req, res, next) => {
 //TODO render new.ejs form and check if the user is login in.
-  res.render('diets/create',{
-    session: req.session.currentUser
-  });
+  res.render('diets/create');
 });
 
 
 
 
 
-/* GET a specific diet*/
-router.get('/:id', (req, res, next) => {
+/* GET the recipes for a specific diet*/
+router.get('/:id/recipes', (req, res, next) => {
 //TODO render to detailed view
-
-Diet.findById(req.params.id, (err, diet) => {
+console.log("entra en la ruta chacho");
+console.log(req.params.id);
+Diet.find({_diet:req.params.id}, (err, diet) => {
   if(err){
     console.log(err);
   }
   res.render('diets/detail', {
-    diet: diet,
-    session: req.session.currentUser
+    diet: diet
   });
 });
 
