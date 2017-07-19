@@ -38,10 +38,11 @@ app.use(layouts);
 app.use(flash());
 app.use(session({
   secret: "basic-auth-secret",
-  cookie: { maxAge: 60000 },
+  resave:true,
+   saveUninitialized: true,
   store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60 // 1 day
+    mongooseConnection: mongoose.connection
+
   })
 }));
 app.use(cookieParser());
@@ -50,16 +51,23 @@ require('./passport/local');
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next)=>{
+  res.locals.user = req.user;
+  next();
+});
+
 //Require routes
 const index = require('./routes/index');
 const diet = require('./routes/diet');
 const recipe = require('./routes/recipe');
 const auth = require('./routes/auth');
+const comment = require('./routes/Comment');
 const user = require('./routes/user');
 app.use('/', index);
 app.use('/diets', diet);
 app.use('/recipes', recipe);
 app.use('/auth', auth);
+app.use('/comments', comment);
 app.use('/user',user);
 require('./config/error-handler')(app);
 

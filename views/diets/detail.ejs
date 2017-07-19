@@ -38,76 +38,31 @@
   <div id="myCarousel" class="carousel slide text-center " data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-      <li data-target="#myCarousel" data-slide-to="4"></li>
-      <li data-target="#myCarousel" data-slide-to="5"></li>
+        <%var i = 0; %>
+        <% recipes.forEach((r) => { %>
+
+      <li data-target="#myCarousel" data-slide-to="<%=i%>"></li>
+
+    <%i++ } )%>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-
+      <% recipes.forEach((r) => { %>
       <div class="item active">
           <img class="item-image"src="/images/recipe3.jpeg" alt="...">
           <div class="carousel-caption d-none d-md-block">
-            <h3>Spaghetti con verduras</h3>
-            <p>Description: Lorem ipsum dolor sit amet, consectetur adip <br>Time: Ut enim ad minim veniam, </p>
+            <h3>Nombre: <%=r.name %></h3>
+            <p>Ingredientes: <%=r.ingredients %></p>
+            <p>Comensales: <%=r.people %></p>
             <div class="bottom-label">
 
               <p>creado por Antonio P.</p>
             </div>
           </div>
       </div>
-
-      <div class="item">
-          <img class="item-image"src="/images/recipe1.jpeg" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Spaghetti con verduras</h3>
-            <p>Description: Lorem ipsum dolor sit amet, consectetur adip <br>Time: Ut enim ad minim veniam, </p>
-            <div class="bottom-label">
-
-              <p>creado por Antonio P.</p>
-            </div>
-          </div>
-      </div>
-
-      <div class="item">
-          <img class="item-image"src="/images/recipe2.jpeg" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Spaghetti con verduras</h3>
-            <p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adip <br><strong>Time:</strong> Ut enim ad minim veniam, </p>
-            <div class="bottom-label">
-
-              <p>creado por Antonio P.</p>
-            </div>
-          </div>
-      </div>
-
-      <div class="item">
-          <img class="item-image"src="/images/recipe3.jpeg" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Spaghetti con verduras</h3>
-            <p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adip <br><strong>Time:</strong> Ut enim ad minim veniam, </p>
-            <div class="bottom-label">
-
-              <p>creado por Antonio P.</p>
-            </div>
-          </div>
-      </div>
-
-      <div class="item">
-          <img class="item-image"src="/images/recipe3.jpeg" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Spaghetti con verduras</h3>
-            <p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adip <br><strong>Time:</strong> Ut enim ad minim veniam, </p>
-            <div class="bottom-label">
-
-              <p>creado por Antonio P.</p>
-            </div>
-          </div>
-      </div>
+          <% } )%>
+  </div>
 
     <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -168,10 +123,13 @@
 
     <div class="col-sm-12 slideanim">
       <div class="row">
+      <form class="" action="index.html" method="post">
+
+      </form>
       <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
       <div class="row">
         <div class="col-sm-12 form-group">
-          <button class="btn btn-default pull-right" type="submit">Enviar</button>
+          <button class="btn btn-default pull-right" id="createComent" type="submit">Enviar</button>
         </div>
       </div>
     </div>

@@ -6,9 +6,9 @@ const recipeSchema = new Schema({
   ingredients: String,
   rating: {type:Number, default:0},
   picture: String,
-  people: String,
+  people: Number,
   description:String,
-  calories:String,
+  calories:Number,
   difficulty: {enum: ['Facil', 'Media','Dificil']},
   _creator: {type:mongoose.Schema.Types.ObjectId, ref:'User'},
   _diet: {type:mongoose.Schema.Types.ObjectId, ref:'Diet'}

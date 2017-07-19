@@ -352,7 +352,9 @@ body {
     border-top-right-radius: 0;
   }
 }
-
+.wrapper-recipes {
+  margin-top: 5%;
+}
 
 /* User profile styles*/
 .photoInput{

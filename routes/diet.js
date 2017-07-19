@@ -3,6 +3,7 @@ const router  = express.Router();
 const Diet = require('../models/Diet');
 const multer  = require('multer');
 const upload = multer({ dest: './public/uploads/' });
+const Recipe = require('../models/Recipe');
 
 /* GET All the diets -> Diet.find() */
 router.get('/', (req, res, next) => {
@@ -93,7 +94,33 @@ router.get('/new', (req, res, next) => {
 });
 
 
+/* GET the recipes for a specific diet*/
+router.get('/:id/recipes', (req, res, next) => {
+//TODO render to detailed view
+Recipe.find({_diet:req.params.id}).populate('_diet').exec()
 
+    .then(recipes => {
+      console.log(recipes._diet);
+      res.render('diets/recipes', {
+        recipes: recipes,
+        idDiet: req.params.id,
+        session: req.session.currentUser,
+        user: req.user
+      });
+
+    })
+    .catch(err => console.log(err));
+/*Recipe.find({_diet:req.params.id}, (err, recipes) => {
+  if(err){
+    console.log(err);
+  }
+  console.log(recipes);
+  res.render('diets/recipes', {
+    recipes: recipes
+  });
+});*/
+
+});
 
 
 /* GET a specific diet*/
@@ -101,13 +128,15 @@ router.get('/:id', (req, res, next) => {
 //TODO render to detailed view
 
 Diet.findById(req.params.id, (err, diet) => {
-  if(err){
-    console.log(err);
-  }
-  res.render('diets/detail', {
-    diet: diet,
-    session: req.session.currentUser
+  Recipe.find({_diet:req.params.id}, (err,recipes)=> {
+    res.render('diets/detail', {
+      diet: diet,
+      session: req.session.currentUser,
+      recipes: recipes
+    });
   });
+
+
 });
 
 });

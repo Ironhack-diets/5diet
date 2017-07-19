@@ -1,0 +1,36 @@
+<div class="wrapper-recipes">
+
+<% if( recipes.length === 0) { %>
+<h1>No tienes recetas en esta dieta</h1>
+<p>Añade una haciendo click</p><a href="/recipes/<%=idDiet%>/new"> aqui</a>
+<%}else{ %>
+  <% recipes.forEach((r) => { %>
+    <div class="diet">
+      <div class="container-fluid well span6">
+        <div class="row-fluid">
+          <div class="span2">
+            <img width="100px"src="/uploads/<%=r.picture%>" class="img-circle">
+          </div>
+
+          <div class="span8">
+            <h3>Nombre: <%=r.name %></h3>
+            <p><b>Ingredientes: </b> <%=r.ingredients %></p>
+            <p><b>Comensales: </b> <%=r.people %></p>
+            <p><b>Calorias: </b> <%=r.calories %></p>
+            <p><b>Descripcion: </b> <%=r.description %></p>
+
+          </div>
+            <% if( session && session._id == user._id) { %>
+              <form class="" action="/diets/<%=r._id%>/delete" method="post">
+              <button class="btn btn-lg btn-primary btn-block" id="btnlogin" type="submit">Delete</button>
+              </form>
+              <form class="" action="/diets/<%=r._id%>/edit" method="get">
+              <button class="btn btn-lg btn-primary btn-block" id="btnlogin" type="submit">Edit</button>
+              </form>
+              <% } %>
+        </div>
+      </div>
+  <%}) %>
+  <%} %>
+<p>Añade una nueva receta haciendo click</p><a href="/recipes/<%=idDiet%>/new"> aqui</a>
+</div>

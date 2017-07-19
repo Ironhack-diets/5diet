@@ -9,7 +9,8 @@ const dietSchema = new Schema({
   aim: String,
   description:String,
   cost:String,
-  _creator: {type:mongoose.Schema.Types.ObjectId, ref:'User'}
+  _creator: {type:mongoose.Schema.Types.ObjectId, ref:'User'},
+  recipes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Recipe' }]
 
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }

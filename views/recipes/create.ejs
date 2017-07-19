@@ -1,0 +1,30 @@
+<div class="wrapper-login pagination-centered">
+  <div class="container" id="dietform">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12">
+        <form class="form-diet" id="newDiet" action="/recipes/<%=dietId%>/new" method="POST" enctype="multipart/form-data">
+          <h2 class="form-signin-heading">Crea tu receta</h2>
+          <label for="name">Nombre:</label>
+          <input type="text" class="form-control" name="name" placeholder="Mi nueva receta" required="" autofocus="" />
+          <label for="ingredients">Ingredientes:</label>
+          <input type="text" class="form-control" name="ingredients" placeholder="#Ajo #Pollo" required="" />
+          <label for="people">Comensales:</label>
+          <input type="number" class="form-control" name="people" placeholder="3" required="" autofocus="" />
+          <label for="calories">Calorias:</label>
+          <input type="number" class="form-control" name="calories" placeholder="355kcal" required="" autofocus="" />
+          <label for="photo">Foto:</label>
+          <input class="photoInput" class="form-control" type="file"  name="photo">
+          <label for="description">Descripcion:</label><br>
+          <textarea class="textDiet"name="description" rows="8" placeholder="Escribe aqui como preparar la receta" form="newDiet"></textarea>
+
+          <button class="btn btn-lg btn-primary btn-block" id="btnlogin" type="submit">Crear</button>
+          <% if (typeof message != "undefined") { %>
+            <div class="error-message">
+              <%= message %>
+            </div>
+            <% } %>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

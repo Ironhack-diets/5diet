@@ -62,22 +62,27 @@ Recipe.findByIdAndUpdate(req.params.id, updates, (err, d) => {
 });
 
 
-/* POST a new diet*/
-router.post('/new', upload.single('photo'), (req, res, next) => {
+/* POST a new recipe*/
+router.post('/:id/new', upload.single('photo'), (req, res, next) => {
 //TODO create the new diet and insert it on Mongo
-
+let dietId = req.params.id;
 let creatorId = req.session.passport.user;
-console.log(creatorId);
-let d = new Diet({
+
+
+let r = new Recipe({
     _creator: creatorId,
     name: req.body.name,
-    categories: req.body.categories,
+    ingredients: req.body.ingredients,
     picture: req.file.filename,
-    aim: req.body.aim,
-    description: req.body.description
+    people: req.body.people,
+    calories: req.body.calories,
+    description: req.body.description,
+    difficulty: req.body.difficulty,
+    _diet: dietId
+
   });
-  console.log(d);
-  d.save((err, obj) => {
+
+  r.save((err, obj) => {
     res.redirect('/');
   });
 
@@ -85,29 +90,20 @@ let d = new Diet({
 
 
 /* Get the form to create a new diet*/
-router.get('/new', (req, res, next) => {
+router.get('/:id/new', (req, res, next) => {
 //TODO render new.ejs form and check if the user is login in.
-  res.render('diets/create');
-});
-
-
-
-
-
-/* GET the recipes for a specific diet*/
-router.get('/:id/recipes', (req, res, next) => {
-//TODO render to detailed view
-console.log("entra en la ruta chacho");
-console.log(req.params.id);
-Diet.find({_diet:req.params.id}, (err, diet) => {
-  if(err){
-    console.log(err);
-  }
-  res.render('diets/detail', {
-    diet: diet
+dietId = req.params.id;
+  res.render('recipes/create',{
+    dietId: dietId,
+    session: req.session.currentUser,
+    user: req.user
   });
 });
 
-});
+
+
+
+
+
 
 module.exports = router;
