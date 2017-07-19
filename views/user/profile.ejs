@@ -56,7 +56,7 @@
                   <div class="container-fluid well span6">
                     <div class="row-fluid">
                       <div class="span2">
-                        <img src="/uploads/<%=d.picture%>" class="img-circle">
+                        <img width="100px"src="/uploads/<%=d.picture%>" class="img-circle">
                       </div>
 
                       <div class="span8">
@@ -66,19 +66,14 @@
                         <h6>Rating: <%=d.rating %></h6>
                         <h6><a href="#">More... </a></h6>
                       </div>
-
-                      <div class="span2">
-                        <div class="btn-group">
-                          <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
-                    Action
-                    <span class="icon-cog icon-white"></span><span class="caret"></span>
-                </a>
-                          <ul class="dropdown-menu">
-                            <li><a href="#"><span class="icon-wrench"></span> Modify</a></li>
-                            <li><a href="#"><span class="icon-trash"></span> Delete</a></li>
-                          </ul>
-                        </div>
-                      </div>
+                      <% if( session && session._id == user._id) { %>
+                      <form class="" action="/diets/<%=d._id%>/delete" method="post">
+                      <button class="btn btn-lg btn-primary btn-block" id="btnlogin" type="submit">Delete</button>
+                      </form>
+                      <form class="" action="/diets/<%=d._id%>/edit" method="get">
+                      <button class="btn btn-lg btn-primary btn-block" id="btnlogin" type="submit">Edit</button>
+                      </form>
+                        <% }%>
                     </div>
                   </div>
 

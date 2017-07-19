@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 });
 
 /* Delete a new diet*/
-router.get('/:id/delete', (req, res, next) => {
+router.post('/:id/delete', (req, res, next) => {
 
 //TODO delete an ID
 let id = req.params.id;
@@ -23,6 +23,21 @@ Diet.findByIdAndRemove(id, (err, obj) => {
 res.redirect("/");
 if (err){ return next(err); }
 });
+});
+
+/* Get the form to create a new diet*/
+router.get('/:id/edit', (req, res, next) => {
+//TODO render new.ejs form and check if the user is login in.
+Diet.findById(req.params.id, (err, d) => {
+    if(err){
+      console.log(err);
+    }
+    res.render('diets/edit', {
+      diet: d,
+      session: req.session.currentUser
+    });
+  });
+
 });
 
 
