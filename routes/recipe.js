@@ -28,26 +28,26 @@ if (err){ return next(err); }
 /* Get the form to create a new diet*/
 router.get('/:id/edit', (req, res, next) => {
 //TODO render new.ejs form and check if the user is login in.
-Recipe.findById(req.params.id, (err, d) => {
+Recipe.findById(req.params.id, (err, r) => {
     if(err){
       console.log(err);
     }
-    res.render('diets/edit', {
-      diet: d,
-      session: req.session.currentUser
+    res.render('recipes/edit', {
+      recipe: r,
+     session: req.session.currentUser
     });
   });
 
 });
 
-
-/* GET a specific diet*/
 router.post('/:id/edit', (req, res, next) => {
 //TODO render to detailed view
 
 let updates = {
   name: req.body.name,
-  categories: req.body.categories,
+  ingredients: req.body.ingredients,
+  people: req.body.people,
+  calories: req.body.calories,
   description: req.body.description
 };
 console.log(updates);
@@ -89,7 +89,7 @@ let r = new Recipe({
 });
 
 
-/* Get the form to create a new diet*/
+/* Get the form to create a new recipe*/
 router.get('/:id/new', (req, res, next) => {
 //TODO render new.ejs form and check if the user is login in.
 dietId = req.params.id;

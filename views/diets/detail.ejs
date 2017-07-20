@@ -1,6 +1,6 @@
 <div class="jumbotron text-center">
   <h1 class= "title"><%= diet.name%></h1>
-  <p class = "subtitle"></p>
+  <p class = "subtitle">Creada por <a class="profileLink" href="/user/<%=diet._creator.id%>"><%= diet._creator.name%></a></p>
 
 </div>
 
@@ -77,48 +77,39 @@
 
   <h2 class="comment-title">¿Qué dicen de esta dieta?</h2><br>
   <h4>Comentarios de usuarios que la han probado</h4>
-        <div class="row">
-        <div class="col-sm-12">
-        </div><!-- /col-sm-12 -->
-        </div><!-- /row -->
+  <div id="wrapper-comments">
+
+    <% comments.forEach((c) => { %>
+
         <div class="row comments">
-        <div class="col-sm-1">
+    <!--    <div class="col-sm-1">
         <div class="comment-image"></div>
-        </div><!-- /col-sm-1 -->
+        </div> /col-sm-1 -->
 
-        <div class="col-sm-5">
+        <div class="col-sm-12">
         <div class="panel panel-default">
         <div class="panel-heading">
-        <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+        <strong>Creado por: <%=c._creator.name%> </strong> <span class="text-muted"> </span>
         </div>
         <div class="panel-body">
-        Panel content
+          <p><%= c.content %></p>
         </div><!-- /panel-body -->
         </div><!-- /panel panel-default -->
         </div><!-- /col-sm-5 -->
 
-        <div class="col-sm-1">
-        <div class="comment-image"></div>
-        </div><!-- /col-sm-1 -->
-
-        <div class="col-sm-5">
-        <div class="panel panel-default">
-        <div class="panel-heading">
-        <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
-        </div>
-        <div class="panel-body">
-        Panel content
-        </div><!-- /panel-body -->
-        </div><!-- /panel panel-default -->
-        </div><!-- /col-sm-5 -->
         </div><!-- /row -->
+        <% })%>
+  </div>
 
+
+</div>
 
 </div>
 
 <!-- Container (Contact Section) -->
 <div id="contact" class="container-fluid ">
   <h2 class="text-center">¿La has probado? Comparte tu opinión</h2>
+   <input type="hidden" name="dietId" id="dietId" value="<%= diet.id%>">
   <div class="row">
 
     <div class="col-sm-12 slideanim">

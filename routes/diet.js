@@ -4,7 +4,7 @@ const Diet = require('../models/Diet');
 const multer  = require('multer');
 const upload = multer({ dest: './public/uploads/' });
 const Recipe = require('../models/Recipe');
-
+const Comment = require('../models/Comment');
 /* GET All the diets -> Diet.find() */
 router.get('/', (req, res, next) => {
   Diet.find({}, (err, diets) => {
@@ -14,17 +14,6 @@ router.get('/', (req, res, next) => {
   });
 });
 
-/* Delete a new diet*/
-router.post('/:id/delete', (req, res, next) => {
-
-//TODO delete an ID
-let id = req.params.id;
-console.log(id);
-Diet.findByIdAndRemove(id, (err, obj) => {
-res.redirect("/user/:id");
-if (err){ return next(err); }
-});
-});
 
 /* Get the form to create a new diet*/
 router.get('/:id/edit', (req, res, next) => {
@@ -45,11 +34,14 @@ Diet.findById(req.params.id, (err, d) => {
 /* GET a specific diet*/
 router.post('/:id/edit', (req, res, next) => {
 //TODO render to detailed view
-
+console.log(req.body);
 let updates = {
   name: req.body.name,
   categories: req.body.categories,
+  aim: req.body.aim,
   description: req.body.description
+
+
 };
 console.log(updates);
 
@@ -85,22 +77,13 @@ let d = new Diet({
 });
 
 
-/* Get the form to create a new diet*/
-router.get('/new', (req, res, next) => {
-//TODO render new.ejs form and check if the user is login in.
-  res.render('diets/create',{
-    session: req.session.currentUser
-  });
-});
-
 
 /* GET the recipes for a specific diet*/
 router.get('/:id/recipes', (req, res, next) => {
 //TODO render to detailed view
-Recipe.find({_diet:req.params.id}).populate('_diet').exec()
-
+Recipe.find({_diet:req.params.id}).populate('_diet')
+    .exec()
     .then(recipes => {
-      console.log(recipes._diet);
       res.render('diets/recipes', {
         recipes: recipes,
         idDiet: req.params.id,
@@ -110,15 +93,6 @@ Recipe.find({_diet:req.params.id}).populate('_diet').exec()
 
     })
     .catch(err => console.log(err));
-/*Recipe.find({_diet:req.params.id}, (err, recipes) => {
-  if(err){
-    console.log(err);
-  }
-  console.log(recipes);
-  res.render('diets/recipes', {
-    recipes: recipes
-  });
-});*/
 
 });
 
@@ -127,18 +101,38 @@ Recipe.find({_diet:req.params.id}).populate('_diet').exec()
 router.get('/:id', (req, res, next) => {
 //TODO render to detailed view
 
-Diet.findById(req.params.id, (err, diet) => {
-  Recipe.find({_diet:req.params.id}, (err,recipes)=> {
-    res.render('diets/detail', {
-      diet: diet,
-      session: req.session.currentUser,
-      recipes: recipes
+Diet.findById(req.params.id).populate('_creator')
+  .exec()
+  .then(diet => {
+    Recipe.find({_diet:req.params.id})
+    .exec()
+    .then(recipes => {
+      Comment.find({_diet:req.params.id}).populate('_creator')
+      .exec()
+      .then(comments => {
+        res.render('diets/detail',{
+          diet: diet,
+          session: req.session.currentUser,
+          recipes: recipes,
+          comments: comments
+        });
+      });
+
     });
   });
 
-
 });
 
+/* Delete a new diet*/
+router.post('/:id/delete', (req, res, next) => {
+
+//TODO delete an ID
+let id = req.params.id;
+console.log(id);
+Diet.findByIdAndRemove(id, (err, obj) => {
+res.redirect("/");
+if (err){ return next(err); }
+});
 });
 
 module.exports = router;

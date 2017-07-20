@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const Comment = require('../models/Comment');
+const User = require('../models/User');
 const multer  = require('multer');
 const upload = multer({ dest: './public/uploads/' });
 
@@ -31,23 +32,22 @@ if (err){ return next(err); }
 
 /* POST a new comment*/
 router.post('/new', (req, res, next) => {
-//TODO create the new diet and insert it on Mongo
-let dietId = req.params.id;
+
 let creatorId = req.session.passport.user;
-console.log(req.body.content);
-
-let c = new Comment({
-    content: req.body.content,
-    _diet: dietId,
-    _creator: creatorId
-
+User.findById(req.session.passport.user)
+.exec()
+.then(user =>{
+  let c = new Comment({
+      content: req.body.content,
+      _diet: req.body.dietId,
+      _creator: creatorId,
+      userName: user.name
+});
+c.save((err, obj) => {
+  console.log(obj);
+  res.status(200).json(obj);
+});
   });
-console.log(c);
-  c.save((err, c) => {
-    console.log(c);
-    res.send(JSON.stringify(c));
-  });
-
 });
 
 

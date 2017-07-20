@@ -5,7 +5,7 @@ const dietSchema = new Schema({
   name: {type:String, required:true},
   categories: String,
   rating: {type:Number, default:0},
-  picture: String,
+  picture: {type:String, default: "f235018f0a9830f4c473e618f995f020"},
   aim: String,
   description:String,
   cost:String,

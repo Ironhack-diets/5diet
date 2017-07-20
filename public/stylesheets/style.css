@@ -2,7 +2,14 @@ body {
   font: 400 15px Lato, sans-serif;
   line-height: 1.8;
 }
-
+.profileLink {
+  text-decoration: none;
+  color: #fff;
+}
+.profileLink:hover {
+  text-decoration: none;
+  color: #E35C48;
+}
 h2 {
   font-size: 24px;
   text-transform: uppercase;
@@ -354,6 +361,7 @@ body {
 }
 .wrapper-recipes {
   margin-top: 5%;
+  text-align: center;
 }
 
 /* User profile styles*/

@@ -1,0 +1,30 @@
+<div class="wrapper-login pagination-centered">
+  <div class="container" id="dietform">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12">
+        <form class="form-diet" id="newDiet" action="/recipes/<%=recipe.id%>/new" method="POST" enctype="multipart/form-data">
+          <h2 class="form-signin-heading">Edita tu receta</h2>
+          <label for="name">Nombre:</label>
+          <input type="text" class="form-control" name="name" value="<%=recipe.name%>" required="" autofocus="" />
+          <label for="ingredients">Ingredientes:</label>
+          <input type="text" class="form-control" name="ingredients" value="<%=recipe.ingredients%>" required="" />
+          <label for="people">Comensales:</label>
+          <input type="number" class="form-control" name="people" value="<%=recipe.people%>" required="" autofocus="" />
+          <label for="calories">Calorias:</label>
+          <input type="number" class="form-control" name="calories" value="<%=recipe.calories%>" required="" autofocus="" />
+          <label for="photo">Foto:</label>
+          <input class="photoInput" class="form-control" type="file" value="<%=recipe.picture%>" name="photo">
+          <label for="description">Descripcion:</label><br>
+          <textarea class="textDiet"name="description" rows="8" value="<%=recipe.description%>" form="newDiet"></textarea>
+
+          <button class="btn btn-lg btn-primary btn-block" id="btnlogin" type="submit">Editar</button>
+          <% if (typeof message != "undefined") { %>
+            <div class="error-message">
+              <%= message %>
+            </div>
+            <% } %>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

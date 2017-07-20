@@ -10,7 +10,7 @@ const userSchema = new Schema({
   personalWeb: String,
   email: {type:String, required:true},
   description: String,
-  picture: {type:String, default: "fa9210d4a80d778900d17bebfb1acb8f"}
+  picture: {type:String, default: "3496981aacbdada20434ba5e9e6fbcb7"}
 
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }

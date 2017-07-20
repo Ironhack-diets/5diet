@@ -35,7 +35,7 @@
                   <h4>Firstname: </h4><input type="text" name="name" value="<%= user.name %>">
                   <h4>Lastname: </h4><input type="text" name="lastname" value="<%= user.lastname %>">
                   <h4>Site: </h4><input type="text" name="personalWeb" value="<%= user.personalWeb %>">
-                  <h4>Photo: </h4><input class="photoInput" type="file" name="photo">
+                  <h4>Photo: </h4><input class="photoInput" value="<%= user.picture %>" type="file" name="photo">
                   <h4>Email: </h4><input type="email" name="email" value="<%= user.email %>">
                   <h4>Description: </h4> <textarea name="description" form="editform" value="<%= user.description %>"></textarea>
                   <input type="submit" name="" value="Guardar Cambios">
@@ -63,7 +63,6 @@
                         <h3>Nombre: <%=d.name %></h3>
                         <h6>Categorias: <%=d.categories %></h6>
                         <h6>Objetivo: <%=d.aim %></h6>
-                        <h6>Rating: <%=d.rating %></h6>
                         <h6><a href="/diets/<%=d._id %>">More... </a></h6>
                         <h6><a href="/diets/<%=d._id %>/recipes">Show recipes</a></h6>
 

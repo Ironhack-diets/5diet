@@ -55,7 +55,9 @@ app.use((req, res, next)=>{
   res.locals.user = req.user;
   next();
 });
-
+app.locals.date_helper = function(ts) {
+  return (new Date(ts)).toISOString();
+};
 //Require routes
 const index = require('./routes/index');
 const diet = require('./routes/diet');

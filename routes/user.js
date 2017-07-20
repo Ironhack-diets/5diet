@@ -18,12 +18,9 @@ router.get('/', function(req, res, next) {
     });
   });
 });
-
-// CRUD => U: Update a product
+// CRUD => U: Update a user
 router.post('/:id/edit', upload.single('photo'), function(req, res, next) {
-  /*  const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(password, salt);*/
-  console.log("entra en edit");
+
   let updates = {
     name: req.body.name,
     lastname: req.body.lastname,
@@ -41,16 +38,20 @@ router.post('/:id/edit', upload.single('photo'), function(req, res, next) {
 });
 // CRUD => R: Retrieve - User detail
 router.get('/:id', function(req, res, next) {
-  User.findById(req.params.id, function(err, u) {
-    Diet.find({
-      _creator: req.params.id
-    }, function(err, diets) {
-      res.render('user/profile', {
-        user: u,
-        diets: diets,
-        session: req.session.currentUser
-      });
+  User.findById(req.params.id)
+    .exec()
+    .then(u => {
+      Diet.find({
+          _creator: req.params.id
+        })
+        .exec()
+        .then(diets => {
+          res.render('user/profile', {
+            user: u,
+            diets: diets,
+            session: req.session.currentUser
+          });
+        });
     });
-  });
 });
 module.exports = router;
