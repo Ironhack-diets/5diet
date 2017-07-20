@@ -29,7 +29,13 @@ Diet.findById(req.params.id, (err, d) => {
   });
 
 });
-
+/* Get the form to create a new diet*/
+router.get('/new', (req, res, next) => {
+//TODO render new.ejs form and check if the user is login in.
+  res.render('diets/create',{
+    session:  req.session.currentUser
+  });
+});
 
 /* GET a specific diet*/
 router.post('/:id/edit',upload.single('photo'), (req, res, next) => {
