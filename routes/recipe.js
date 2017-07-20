@@ -13,17 +13,7 @@ router.get('/', (req, res, next) => {
   });
 });
 
-/* Delete a new diet*/
-router.post('/:id/delete', (req, res, next) => {
 
-//TODO delete an ID
-let id = req.params.id;
-console.log(id);
-Recipe.findByIdAndRemove(id, (err, obj) => {
-res.redirect("/");
-if (err){ return next(err); }
-});
-});
 
 /* Get the form to create a new diet*/
 router.get('/:id/edit', (req, res, next) => {
@@ -42,7 +32,7 @@ Recipe.findById(req.params.id, (err, r) => {
 
 router.post('/:id/edit', (req, res, next) => {
 //TODO render to detailed view
-
+console.log("holaaaaaaaaaaaaaa");
 let updates = {
   name: req.body.name,
   ingredients: req.body.ingredients,
@@ -52,7 +42,7 @@ let updates = {
 };
 console.log(updates);
 
-Recipe.findByIdAndUpdate(req.params.id, updates, (err, d) => {
+Recipe.findByIdAndUpdate(req.params.id, updates, (err, r) => {
   if(err){
     console.log(err);
   }
@@ -100,7 +90,17 @@ dietId = req.params.id;
   });
 });
 
+/* Delete a new recipe*/
+router.post('/:id/delete', (req, res, next) => {
 
+//TODO delete an ID
+let id = req.params.id;
+console.log(id);
+Recipe.findByIdAndRemove(id, (err, obj) => {
+res.redirect("/");
+if (err){ return next(err); }
+});
+});
 
 
 

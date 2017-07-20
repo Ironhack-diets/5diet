@@ -32,9 +32,9 @@ Diet.findById(req.params.id, (err, d) => {
 
 
 /* GET a specific diet*/
-router.post('/:id/edit', (req, res, next) => {
+router.post('/:id/edit',upload.single('photo'), (req, res, next) => {
 //TODO render to detailed view
-console.log(req.body);
+console.log(req.file);
 let updates = {
   name: req.body.name,
   categories: req.body.categories,
