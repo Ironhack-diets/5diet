@@ -2,7 +2,7 @@
 
 <% if( recipes.length === 0) { %>
 <h1>No tienes recetas en esta dieta</h1>
-<p>Añade una haciendo click</p><a href="/recipes/<%=idDiet%>/new"> aqui</a>
+<p>Añade una haciendo click</p><a class=""href="/recipes/<%=idDiet%>/new"> aqui</a>
 <%}else{ %>
 
   <% recipes.forEach((r) => { %>
@@ -22,7 +22,7 @@
 
           </div>
             <% if( session && session._id == user._id) { %>
-              <form class="" action="/diets/<%=r._id%>/delete" method="post">
+              <form class="" action="/recipes/<%=r._id%>/delete" method="post">
               <button class="btn-lgn red" id="deleteRecipe" type="submit">Delete</button>
               </form>
               <form class="" action="/recipes/<%=r._id%>/edit" method="get">

@@ -33,11 +33,11 @@
         <ul class="nav navbar-nav navbar-right">
           <% if(typeof session == "undefined") { %>
             <li><a href="/auth/login">LOGIN</a></li>
-            <li><a href="/auth/signup">SIGN-UP</a></li>
+            <li><a href="/auth/signup">REGISTRATE</a></li>
             <% }else{ %>
               <li><a href="/auth/logout">LOGOUT</a></li>
-              <li><a href="/user/<%= session._id %>">PROFILE</a></li>
-                <li><a href="/diets/new">CREATE DIET</a></li>
+              <li><a href="/user/<%= session._id %>">PERFIL</a></li>
+              <!--  <li><a href="/diets/new">CREATE DIET</a></li>-->
 
               <% } %>
         </ul>

@@ -17,13 +17,13 @@
         </div>
         <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
           <div class="btn-group" role="group">
-            <button type="button" id="userData" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <div class="hidden-xs">User info</div>
+            <button type="button" id="userData" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <div class="hidden-xs"> Mi perfil</div>
             </button>
           </div>
           <div class="btn-group" role="group">
-            <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                <div class="hidden-xs">Diets</div>
+            <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
+                <div class="hidden-xs"> Mis dietas</div>
             </button>
           </div>
         </div>
@@ -34,25 +34,27 @@
               <% if( session && session._id == user._id) { %>
                 <form class="" id="edituser" action="/user/<%=user._id%>/edit" method="post" enctype="multipart/form-data">
 
-                  <h4>Firstname: </h4><input type="text" name="name" value="<%= user.name %>">
-                  <h4>Lastname: </h4><input type="text" name="lastname" value="<%= user.lastname %>">
-                  <h4>Site: </h4><input type="text" name="personalWeb" value="<%= user.personalWeb %>">
-                  <h4>Photo: </h4><input class="photoInput" value="<%= user.picture %>" type="file" name="photo">
+                  <h4>Nombre: </h4><input type="text" name="name" value="<%= user.name %>">
+                  <h4>Apellidos: </h4><input type="text" name="lastname" value="<%= user.lastname %>">
+                  <h4>Web: </h4><input type="text" name="personalWeb" value="<%= user.personalWeb %>">
+                  <h4>Foto: </h4><input class="photoInput" value="<%= user.picture %>" type="file" name="photo">
                   <h4>Email: </h4><input type="email" name="email" value="<%= user.email %>">
-                  <h4>Description: </h4> <textarea name="description" form="editform" value="<%= user.description %>"></textarea>
-                  <input type="submit" name="" value="Guardar Cambios">
+                  <h4>Descripcion: </h4> <textarea name="description"cols="50" form="editform" value="<%= user.description %>"></textarea>
+                  <br>
+                  <input type="submit" class="btn-lgn red" name="" value="Guardar">
                 </form>
                 <% }else{ %>
-                  <h4>Firstname: <%= user.name %></h4>
-                  <h4>Lastname: <%=user.lastname%></h4>
-                  <h4>Site: <%= user.personalWeb %></h4>
+                  <h4>Nombre: <%= user.name %></h4>
+                  <h4>Apellidos: <%=user.lastname%></h4>
+                  <h4>Web: <%= user.personalWeb %></h4>
                   <h4>Email: <%= user.email %></h4>
-                  <h4>Description: <%= user.description %></h4>
+                  <h4>Descripcion: <%= user.description %></h4>
                   <% } %>
 
             </div>
             <div class="tab-pane fade in" id="tab2">
               <h1>Mis dietas</h1>
+
               <% diets.forEach((d) => { %>
                 <div class="diet">
                   <div class="container-fluid well span6">
@@ -65,21 +67,22 @@
                         <h3>Nombre: <%=d.name %></h3>
                         <h6>Categorias: <%=d.categories %></h6>
                         <h6>Objetivo: <%=d.aim %></h6>
-                        <h6><a href="/diets/<%=d._id %>">More... </a></h6>
-                        <h6><a href="/diets/<%=d._id %>/recipes">Show recipes</a></h6>
+                        <h6><a href="/diets/<%=d._id %>">Más... </a></h6>
+                        <h6><a href="/diets/<%=d._id %>/recipes">Mostrar recetas</a></h6>
 
                       </div>
                       <% if( session && session._id == user._id) { %>
                       <form class="" action="/diets/<%=d._id%>/delete" method="post">
-                      <button class="btn-lgn red" id="btnlogin" type="submit">Delete</button>
+                      <button class="btn-lgn red" id="btnlogin" type="submit">Borrar</button>
                       </form>
 
-                      <a href="/diets/<%=d._id%>/edit" class="btn-lgn red" id="btnlogin">Edit</a>
+                      <a href="/diets/<%=d._id%>/edit" class="btn-lgn red" id="btnlogin">Editar</a>
                         <% }%>
                     </div>
                   </div>
 
                   <%  }) %>
+                    <a class="btn-lgn red"href="/diets/new">Crear</a>
                 </div>
 
             </div>
