@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -12,7 +13,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const MongoStore = require("connect-mongo")(session);
 
-mongoose.connect('mongodb://localhost/dietsapp').then(() => debug('DB Conected! =)'));
+mongoose.connect(process.env.MONGO_DB_URL).then(() => debug('DB Conected! =)'));
 
 const app = express();
 

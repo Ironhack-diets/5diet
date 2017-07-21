@@ -56,22 +56,26 @@
 </div>
 
 
-
+<div class="text-center">
   <h2 class="comment-title">¿Qué dicen de esta dieta?</h2><br>
   <h4>Comentarios de usuarios que la han probado</h4>
-  <div id="wrapper-comments">
+
+</div>
+
+  <div id="wrapper-comments" class="container">
 
     <% comments.forEach((c) => { %>
 
-        <div class="row comments">
+        <div class="row comments pagination-centered">
     <!--    <div class="col-sm-1">
         <div class="comment-image"></div>
         </div> /col-sm-1 -->
 
-        <div class="col-sm-12">
+        <div class="col-sm-12 pagination-centered" >
         <div class="panel panel-default">
         <div class="panel-heading">
-        <strong>Creado por: <%=c._creator.name%> </strong> <span class="text-muted"> </span>
+          <a href="/user/<%=c._creator.id %>" class=""> <img width="50" height="50" src="/uploads/<%=c._creator.picture%>" class="img-circle"alt=""> </a>
+        <strong>Creado por: <a href="/user/<%=c._creator.id%>"><%=c._creator.name%></a> </strong> <span class="text-muted"> </span>
         </div>
         <div class="panel-body">
           <p><%= c.content %></p>
@@ -102,7 +106,7 @@
       <textarea class="form-control" id="commentContent" name="content" placeholder="Comment" rows="5"></textarea><br>
       <div class="row">
         <div class="col-sm-12 form-group">
-          <button class="btn-lgn  pull-right" id="createComent" type="submit">Enviar</button>
+          <button class="btn-lgn red pull-right" id="createComent" type="submit">Enviar</button>
         </div>
       </div>
     </div>

@@ -19,9 +19,13 @@ $(document).ready(function() {
       const panelBody =  $('<div>').addClass('panel-body');
       const p = $('<p>').text(content);
       const author = $('<strong>').text("Creado por: "+response.userName + " ");
+      const userLink = $('<a>').attr('href', '/user/<%=c._creator.id%>');
+      const userPic = $('<img>').addClass('img-circle').attr('src','/uploads/'+response.userPic).attr('width','50').attr('height','50');
       //const time = $('<span>').text("el "+ mydate);
+      userLink.append(userPic);
       panelBody.append(p);
       panelHeading
+        .append(userLink)
         .append(author);
     //    .append(time);
       panel

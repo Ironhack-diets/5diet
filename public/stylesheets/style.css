@@ -1,6 +1,7 @@
 body {
   font: 400 15px Lato, sans-serif;
   line-height: 1.8;
+ overflow-x: hidden;
 }
 .profileLink {
   text-decoration: none;
@@ -424,6 +425,7 @@ body {
 .wrapper-profile {
   margin-top: 8%;
 }
+
 #favorites {
   background: #fff;
   color: #E35C48;
@@ -628,6 +630,7 @@ body {
   text-align: -webkit-center;
       padding-top: 20px;
       padding-bottom: 30px;
+     margin-left: 8%;
 }
 .card {
   display: inline-block;

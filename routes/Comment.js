@@ -41,7 +41,8 @@ User.findById(req.session.passport.user)
       content: req.body.content,
       _diet: req.body.dietId,
       _creator: creatorId,
-      userName: user.name
+      userName: user.name,
+      userPic: user.picture
 });
 c.save((err, obj) => {
   console.log(obj);
