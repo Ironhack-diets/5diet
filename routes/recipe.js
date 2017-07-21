@@ -30,7 +30,7 @@ Recipe.findById(req.params.id, (err, r) => {
 
 });
 
-router.post('/:id/edit', (req, res, next) => {
+router.post('/:id/edit',upload.single('photo'), (req, res, next) => {
 //TODO render to detailed view
 console.log("holaaaaaaaaaaaaaa");
 let updates = {
@@ -38,7 +38,9 @@ let updates = {
   ingredients: req.body.ingredients,
   people: req.body.people,
   calories: req.body.calories,
+  picture: req.file.filename,
   description: req.body.description
+
 };
 console.log(updates);
 

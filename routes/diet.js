@@ -45,7 +45,9 @@ let updates = {
   name: req.body.name,
   categories: req.body.categories,
   aim: req.body.aim,
+  picture: req.file.filename,
   description: req.body.description
+
 
 
 };

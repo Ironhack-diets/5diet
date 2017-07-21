@@ -591,6 +591,9 @@ body {
     width: 100%;
     margin-bottom: 35px;
   }
+  .card{
+    min-height: 450px;
+  }
 }
 
 @media screen and (max-width: 480px) {
